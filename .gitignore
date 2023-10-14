@@ -116,3 +116,6 @@ Backup*/
 !slimdx/
 !slimdx/*
 !slimdx/**/*
+
+# Visual Studio Directory
+.vs
