@@ -119,3 +119,6 @@ Backup*/
 
 # Visual Studio Directory
 .vs
+
+# Release Zip
+NintendoSpy-release*.zip
