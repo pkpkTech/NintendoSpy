@@ -44,7 +44,10 @@ namespace NintendoSpy
 
             foreach (var binding in doc.Root.Elements ("binding")) 
             {
-                var outputKey = readKeybinding (binding.Attribute ("output-key").Value);
+                ushort outputKey = 0;
+                
+                var outputKeyAttribute = binding.Attribute ("output-key") ?? binding.Attribute("output-key-ex");
+                if (outputKeyAttribute != null) outputKey = readKeybinding(outputKeyAttribute.Value);
                 if (outputKey == 0) continue;
 
                 List <string> requiredButtons = new List <string> ();
@@ -92,11 +95,15 @@ namespace NintendoSpy
             var upperName = name.ToUpperInvariant ();
 
             if (Regex.Match (upperName, "^[A-Z0-9]$").Success) {
-                return (ushort)upperName.ToCharArray()[0];
+                return upperName.ToCharArray()[0];
             }
             else if (VK_KEYWORDS.ContainsKey (upperName)) {
                 return VK_KEYWORDS [upperName];
             } 
+            else if (Enum.TryParse(name, out Key key) && Enum.IsDefined(typeof(Key), key))
+            {
+                return vkConvert(key);
+            }
             else {
                 return 0;
             }
