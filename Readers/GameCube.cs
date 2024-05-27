@@ -52,6 +52,13 @@ namespace NintendoSpy.Readers
                     state.SetAnalog("cstick_y", readStick(SignalTool.readByte(packet, BUTTONS.Length + 24)));
                     state.SetAnalog("trig_l", readTrigger(SignalTool.readByte(packet, BUTTONS.Length + 32)));
                     state.SetAnalog("trig_r", readTrigger(SignalTool.readByte(packet, BUTTONS.Length + 40)));
+
+                    state.SetAnalog("lstick_x_v", SignalTool.readByte(packet, BUTTONS.Length));
+                    state.SetAnalog("lstick_y_v", SignalTool.readByte(packet, BUTTONS.Length + 8));
+                    state.SetAnalog("cstick_x_v", SignalTool.readByte(packet, BUTTONS.Length + 16));
+                    state.SetAnalog("cstick_y_v", SignalTool.readByte(packet, BUTTONS.Length + 24));
+                    state.SetAnalog("trig_l_v", SignalTool.readByte(packet, BUTTONS.Length + 32));
+                    state.SetAnalog("trig_r_v", SignalTool.readByte(packet, BUTTONS.Length + 40));
                     break;
                 // Packets are written as bytes when writing from the NicoHood API, so we're looking for a packet size of 8 (interpreted as bytes)
                 case NICOHOOD_PACKET_SIZE:
